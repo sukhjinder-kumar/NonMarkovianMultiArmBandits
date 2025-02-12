@@ -1,12 +1,7 @@
 import matplotlib.pyplot as plt
-import seaborn as sns
-import pandas as pd
-import numpy as np
-from tqdm import tqdm
-import math
-import random
 import plotly.graph_objects as go
 import plotly.express as px
+
 
 class Store():
     LINEWIDTH = 1
