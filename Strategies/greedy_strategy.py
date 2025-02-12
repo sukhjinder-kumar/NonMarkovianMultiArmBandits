@@ -1,6 +1,7 @@
 from Strategies.strategy_interface import Strategy
 import random
 
+
 class GreedyStrategy(Strategy):
     def __init__(self, k, optimistic_initial_guess_reward=True):
         self.name = f"Greedy with optimism {optimistic_initial_guess_reward}"

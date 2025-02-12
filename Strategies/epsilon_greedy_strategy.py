@@ -1,3 +1,7 @@
+from Strategies.strategy_interface import Strategy
+import random
+
+
 class EpsilonGreedyStrategy(Strategy):
     def __init__(self, k, epsilon=0.1, optimistic_initial_guess_reward=True):
         self.name = f"epsilon-{epsilon} Greedy Policy with optimism {optimistic_initial_guess_reward}"
