@@ -4,9 +4,9 @@ import math
 import matplotlib.pyplot as plt
 
 
-class PolicyGradient(Strategy):
+class PolicyGradientArctan(Strategy):
     def __init__(self, k, alpha=0.1):
-        self.name = f"Policy Gradient with alpha={alpha}"
+        self.name = f"Policy Gradient Arctan with alpha={alpha}"
         self.k = k
         self.preference_lst = [0]*self.k
         self.preference_lst_history = [self.preference_lst]
@@ -16,8 +16,8 @@ class PolicyGradient(Strategy):
 
     def preference_to_probability(self):
         # probability of picking that actions (of selecting ath machine)
-        sum_prob = sum([math.exp(preference) for preference in self.preference_lst])
-        prob_lst = [math.exp(preference)/sum_prob for preference in self.preference_lst]
+        sum_prob = sum([math.exp(math.pi/2 * math.tan(preference)) for preference in self.preference_lst])
+        prob_lst = [math.exp(math.pi/2 * math.tan(preference))/sum_prob for preference in self.preference_lst]
         return prob_lst
         
     def get_action(self):
@@ -31,10 +31,12 @@ class PolicyGradient(Strategy):
         for a in range(self.k):  # sampling over actions
             if a == cur_action:
                 self.preference_lst[a] = self.preference_lst[a] + \
-                                        self.alpha * (cur_reward - self.baseline_lst[a]) * (1-prob_lst[a])
+                                        self.alpha * (cur_reward - self.baseline_lst[a]) * (1-prob_lst[a]) \
+                                        * 2/math.pi / (1 + (math.pi/2 * math.tan(self.preference_lst[a]))**2)
             else:
                 self.preference_lst[a] = self.preference_lst[a] - \
-                                        self.alpha * (cur_reward - self.baseline_lst[a]) * prob_lst[a]
+                                        self.alpha * (cur_reward - self.baseline_lst[a]) * prob_lst[a] \
+                                        * 2/math.pi / (1 + (math.pi/2 * math.tan(self.preference_lst[a]))**2)
         # update baseline
         self.n[cur_action] += 1
         lr = 1/self.n[cur_action]  # after updating n -> n + 1

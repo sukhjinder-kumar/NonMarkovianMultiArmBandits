@@ -4,6 +4,7 @@ from Strategies.random_action import RandomAction
 from Strategies.greedy_strategy import GreedyStrategy
 from Strategies.epsilon_greedy_strategy import EpsilonGreedyStrategy
 from Strategies.policy_gradient import PolicyGradient
+from Strategies.policy_gradient_arctan import PolicyGradientArctan
 from Strategies.ucb import UCBStrategy
 from Strategies.thompson_sampling import ThompsonSampling
 from Strategies.HeuristicThompsonSampling.heuristic_thompson_sampling import HeuristicThompsonSampling
@@ -25,21 +26,23 @@ strategies = []
 # strategies.append(RandomAction(k=mab.k))
 # strategies.append(GreedyStrategy(k=mab.k, optimistic_initial_guess_reward=True))
 # strategies.append(EpsilonGreedyStrategy(k=mab.k, epsilon=0.1, optimistic_initial_guess_reward=False))
-# strategies.append(PolicyGradient(k=mab.k, alpha=0.03))
+strategies.append(PolicyGradient(k=mab.k, alpha=0.6))
+strategies.append(PolicyGradientArctan(k=mab.k, alpha=0.7))
+strategies.append(PolicyGradientArctan(k=mab.k, alpha=0.8))
 # strategies.append(UCBStrategy(k=mab.k, alpha=3, name="3"))
 # strategies.append(UCBStrategy(k=mab.k, alpha=2, name="2"))
 # strategies.append(UCBStrategy(k=mab.k, alpha=1, name="1"))
 # strategies.append(UCBStrategy(k=mab.k, alpha=0.75, name="0.75"))
 strategies.append(UCBStrategy(k=mab.k, alpha=0.5, name="0.5"))
-strategies.append(UCBStrategy(k=mab.k, alpha=0.25, name="0.25"))
-strategies.append(ThompsonSampling(k=mab.k))
+# strategies.append(UCBStrategy(k=mab.k, alpha=0.25, name="0.25"))
+# strategies.append(ThompsonSampling(k=mab.k))
 # strategies.append(HeuristicThompsonSampling(k=mab.k))
 # strategies.append(Heuristic1a(k=mab.k, c=1))
 # strategies.append(Heuristic1b(k=mab.k, c=1))
 # strategies.append(Heuristic2a(k=mab.k, c=1))
 # strategies.append(Heuristic2b(k=mab.k, c=1))
-strategies.append(Heuristic3a(k=mab.k, c=3))
-strategies.append(Heuristic3b(k=mab.k, c=3))
+# strategies.append(Heuristic3a(k=mab.k, c=3))
+# strategies.append(Heuristic3b(k=mab.k, c=3))
 
 strategies_names = [strategy.name for strategy in strategies]
 store = Store(strategies_names, num_run=NUMBER_RUN, time_step=TIME_STEP)
